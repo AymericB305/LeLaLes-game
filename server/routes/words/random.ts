@@ -1,5 +1,8 @@
-import { PrismaClient, word } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import type { word } from "@prisma/client";
 import { z } from 'zod'
+
+const prisma = new PrismaClient()
 
 const querySchema = z.object({
   amount: z.string().default('1').transform((val, ctx) => {
@@ -19,8 +22,6 @@ export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, query => querySchema.safeParse(query))
    if (!query.success)
     throw query.error.issues
-
-  const prisma = new PrismaClient()  
   
   const words = await prisma.$queryRaw<word[]>
     `SELECT * FROM word ORDER BY RANDOM() LIMIT ${query.data.amount};`
