@@ -5,7 +5,11 @@ import { z } from 'zod'
 const prisma = new PrismaClient()
 
 const querySchema = z.object({
-  amount: z.string().default('1').transform((val, ctx) => {
+  amount: z.string().optional().transform((val, ctx) => {
+    if (val == undefined) {
+      return 1
+    }
+
     const parsed = parseInt(val)
     if (isNaN(parsed)) {
       ctx.addIssue({
