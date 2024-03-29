@@ -24,11 +24,13 @@ const querySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, query => querySchema.safeParse(query))
-   if (!query.success)
+  if (!query.success)
     throw query.error.issues
-  
+
   const words = await prisma.$queryRaw<word[]>
     `SELECT * FROM word ORDER BY RANDOM() LIMIT ${query.data.amount};`
-  
+      
+  if (words.length == 0) return []
+  if (words.length == 1) return words[0]
   return words
 })
