@@ -4,7 +4,6 @@
       v-for="article in selectedGender.articles"
       :article
       :word="mot?.word ?? ''" />
-
     <Choice
       v-for="gender in genders"
       :articles="gender.articles"
@@ -17,20 +16,35 @@
 <script lang="ts" setup>
 import type { word } from '@prisma/client';
 
-const { data: mot } = await useFetch<word>('/words/random')
+const max = 50
+let i = 0
+
+let words = await loadWords()
+const mot = toRef(words.value[i])
 
 const selectedGender = ref<Gender>(noneGender)
 
 async function validate() {
   if (selectedGender.value.label == mot.value?.genre) {
-    const { data } = await useFetch<word>('/words/random')
-    mot.value = data.value
     selectedGender.value = noneGender
+    i++
+    if (i >= max) {
+      i = 0
+      words = await loadWords()
+    }    
+    mot.value = words.value[i]
   } else {
     console.log("failed");    
   }
 }
 
+async function loadWords(): Promise<Ref<word[]>> {
+  const { data, error } = await useFetch<word[]>(`/words/random?amount=${max}`)
+  if (!data || !data.value) {
+    throw error
+  }
+  return ref(data.value)
+}
 </script>
 
 <style>
