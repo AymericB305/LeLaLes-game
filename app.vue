@@ -21,13 +21,13 @@ const { data: mot } = await useFetch<word>('/words/random')
 
 const selectedGender = ref<Gender>(noneGender)
 
-function validate() {
+async function validate() {
   if (selectedGender.value.label == mot.value?.genre) {
-    console.log("gg");
-    
+    const { data } = await useFetch<word>('/words/random')
+    mot.value = data.value
+    selectedGender.value = noneGender
   } else {
-    console.log("noob");
-    
+    console.log("failed");    
   }
 }
 
