@@ -4,12 +4,14 @@
       v-for="article in selectedGender.articles"
       :article
       :word="mot?.word ?? ''" />
+
     <div class="grid grid-cols-2 gap-2">
       <Choice
         v-for="(gender, _, i) in genders"
-        :class="{ 'col-span-2': i === Object.keys(gender).length }"
+        :class="{ 'col-span-2': i == Object.keys(gender).length }"
         :articles="gender.articles"
-        @click="selectedGender=gender" />
+        :color="wrongIndexes.findIndex(idx => idx == i) == -1 ? 'teal' : 'red'"
+        @click="selectGender(gender, i)" />
     </div>
     
     <UButton icon="i-heroicons-check" @click="validate()">Valider</UButton>
@@ -20,6 +22,9 @@
 
 <script lang="ts" setup>
 import type { word } from '@prisma/client';
+import type { Gender } from './models/gender';
+
+const toast = useToast()
 
 const max = 50
 let i = 0
@@ -27,9 +32,9 @@ let i = 0
 let words = await loadWords()
 const mot = toRef(words.value[i])
 
-const selectedGender = ref<Gender>(noneGender)
+let selectedGender = ref<Gender>(noneGender)
 
-const toast = useToast()
+let wrongIndexes = ref<number[]>([])
 
 async function validate() {
   if (selectedGender.value.label == mot.value?.genre) {
@@ -41,9 +46,17 @@ async function validate() {
       words = await loadWords()
     }    
     mot.value = words.value[i]
-  } else {
-    console.log("failed");    
+    wrongIndexes.value = []
+  } else {    
+    wrongIndexes.value = [...wrongIndexes.value, selectedIndex.value]
   }
+}
+
+let selectedIndex = ref(0)
+
+function selectGender(gender: Gender, index: number) {
+  selectedGender.value = gender
+  selectedIndex.value = index
 }
 
 async function loadWords(): Promise<Ref<word[]>> {
