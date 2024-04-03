@@ -4,7 +4,7 @@
       <Preview 
         v-for="article in selectedGender.articles"
         :article
-        :word="mot?.word ?? ''" />
+        :word="currentWord?.word ?? ''" />
     </div>
     <div class="grid grid-cols-2 gap-2">
       <Choice
@@ -30,25 +30,39 @@ const max = 50
 let i = 0
 
 let words = await loadWords()
-const mot = toRef(words.value[i])
+const currentWord = toRef(words.value[i])
 
 let selectedGender = ref<Gender>(noneGender)
 
 let wrongIndexes = ref<number[]>([])
 
 async function validate() {
-  if (selectedGender.value.label == mot.value?.genre) {
-    toast.add({ title: `${selectedGender.value.articles[1]} ${mot.value.word}` })
-    selectedGender.value = noneGender
+  if (selectedGender.value.label == currentWord.value?.genre) {
+    const title = `${selectedGender.value.articles[1]} ${currentWord.value.word}`
+    if (selectedGender.value.label == 'mf') {
+      title.concat(` / ${selectedGender.value.articles[3]} ${currentWord.value.word}`)
+    }
+    toast.add({
+      title,
+      icon: 'i-heroicons-check-circle',
+      ui: {
+        progress: {
+          base: 'hidden'
+        }
+      },
+    })
+    
     i++
     if (i >= max) {
       i = 0
       words = await loadWords()
-    }    
-    mot.value = words.value[i]
+    }
+    selectedGender.value = noneGender
+    currentWord.value = words.value[i]
     wrongIndexes.value = []
   } else {    
     wrongIndexes.value = [...wrongIndexes.value, selectedIndex.value]
+    selectedGender.value = noneGender
   }
 }
 
