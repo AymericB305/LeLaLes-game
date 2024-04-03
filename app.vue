@@ -4,12 +4,17 @@
       v-for="article in selectedGender.articles"
       :article
       :word="mot?.word ?? ''" />
-    <Choice
-      v-for="gender in genders"
-      :articles="gender.articles"
-      @click="selectedGender=gender" />
+    <div class="grid grid-cols-2 gap-2">
+      <Choice
+        v-for="(gender, _, i) in genders"
+        :class="{ 'col-span-2': i === Object.keys(gender).length }"
+        :articles="gender.articles"
+        @click="selectedGender=gender" />
+    </div>
+    
+    <UButton icon="i-heroicons-check" @click="validate()">Valider</UButton>
 
-      <UButton icon="i-heroicons-check" @click="validate()">Valider</UButton>
+    <UNotifications />
   </div>
 </template>
 
@@ -24,8 +29,11 @@ const mot = toRef(words.value[i])
 
 const selectedGender = ref<Gender>(noneGender)
 
+const toast = useToast()
+
 async function validate() {
   if (selectedGender.value.label == mot.value?.genre) {
+    toast.add({ title: `${selectedGender.value.articles[1]} ${mot.value.word}` })
     selectedGender.value = noneGender
     i++
     if (i >= max) {
