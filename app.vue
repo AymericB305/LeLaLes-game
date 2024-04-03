@@ -1,10 +1,11 @@
 <template>
   <div class="flex items-center justify-center flex-col gap-2 h-full">
-    <Preview 
-      v-for="article in selectedGender.articles"
-      :article
-      :word="mot?.word ?? ''" />
-
+    <div class="grid grid-flow-col grid-rows-2 gap-2">
+      <Preview 
+        v-for="article in selectedGender.articles"
+        :article
+        :word="mot?.word ?? ''" />
+    </div>
     <div class="grid grid-cols-2 gap-2">
       <Choice
         v-for="(gender, _, i) in genders"
@@ -22,7 +23,6 @@
 
 <script lang="ts" setup>
 import type { word } from '@prisma/client';
-import type { Gender } from './models/gender';
 
 const toast = useToast()
 
