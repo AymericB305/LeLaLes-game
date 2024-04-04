@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.14.2",
+    "@pinia/nuxt": "^0.5.1",
     "@prisma/client": "^5.10.2",
     "@vercel/postgres": "^0.7.2",
+    "pinia": "^2.1.7",
     "prisma": "^5.10.2",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
