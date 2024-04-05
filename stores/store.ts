@@ -28,7 +28,10 @@ export const useMyStore = defineStore({
       this.selectedGender = gender
       this.selectedIndex = index
     },
-    async progress() {     
+    async progress() {
+      if (this.wrongIndices.length === 0) {
+        this.score++
+      }
       this.index++
       if (this.index >= max) {
         this.index = 0
@@ -43,7 +46,6 @@ export const useMyStore = defineStore({
     },
   },
   getters: {
-    amount: (state) => state.index + 1,
     currentWord: (state) => state.words[state.index],
     answer(state): string {
       const title = `${state.selectedGender.articles[1]} ${this.currentWord.word}`

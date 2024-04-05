@@ -1,5 +1,6 @@
 <template>
   <div class="flex items-center justify-center flex-col gap-2 h-full">
+    {{ store.score }} / {{ store.index }}
     <div class="grid grid-flow-col grid-rows-2 gap-2">
       <Preview 
         v-for="article in store.selectedGender.articles"
