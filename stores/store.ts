@@ -58,7 +58,7 @@ export const useMyStore = defineStore({
       return state.selectedGender.label == this.currentWord.genre
     },
     choiceColorByIndex: (state) => {
-      return (index: number) => state.wrongIndices.findIndex(idx => idx === index) === -1 ? 'teal' : 'red'
+      return (index: number) => state.wrongIndices.findIndex(idx => idx === index) === -1 ? 'nevada' : 'red'
     }
   }
 })

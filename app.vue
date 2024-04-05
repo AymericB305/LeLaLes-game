@@ -1,22 +1,33 @@
 <template>
-  <div class="flex items-center justify-center flex-col gap-2 h-full">
-    {{ store.score }} / {{ store.index }}
-    <div class="grid grid-flow-col grid-rows-2 gap-2">
+  <div class="flex items-center justify-around flex-col gap-2 h-full">
+    <Score
+      :score="store.score"
+      :index="store.index"
+    />
+
+    <div class="flex flex-col gap-4">
       <Preview 
-        v-for="article in store.selectedGender.articles"
-        :article
-        :word="store.currentWord.word" />
-    </div>
-    <div class="grid grid-cols-2 gap-2">
-      <Choice
-        v-for="(gender, _, i) in genders"
-        :class="{ 'col-span-2': i == Object.keys(gender).length }"
-        :articles="gender.articles"
-        :color="store.choiceColorByIndex(i)"
-        @click="store.selectGender(gender, i)" />
-    </div>
+        :articles="store.selectedGender.articles"
+        :word="store.currentWord.word"
+      />
+      <div class="grid grid-cols-2 gap-2">
+        <Choice
+          v-for="(gender, _, i) in genders"
+          :class="{ 'col-span-2': i == Object.keys(gender).length }"
+          :articles="gender.articles"
+          :color="store.choiceColorByIndex(i)"
+          @click="store.selectGender(gender, i)"
+        />
+      </div>
+    </div>    
     
-    <UButton icon="i-heroicons-check" @click="validate()">Valider</UButton>
+    <UButton
+      @click="validate()" 
+      :ui="{ rounded: 'rounded-full', font: 'font-bold' }"
+      class="!text-white px-12"
+      label="Valider"
+      size="xl"
+    />
 
     <UNotifications />
   </div>
@@ -51,6 +62,7 @@ async function validate() {
 html, body {
   height: 100%;
   width: 100%;
+  background-color: #121B23;
 }
 #__nuxt {
   height: 100%;

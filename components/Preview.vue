@@ -1,13 +1,15 @@
 <template>
   <div class="w-full flex justify-center items-center">
-    {{ article }} {{ word }} ?
+    {{ articlesString }} {{ word }} ?
   </div>
 </template>
 
 <script lang="ts" setup>
-const {article} = defineProps<{
-  article: string,
+const props = defineProps<{
+  articles: string[],
   word: string
 }>()
+
+const articlesString = toRef(() => props.articles.join('/'))
 
 </script>

@@ -1,24 +1,24 @@
 export type Gender = {
   label: 'm' | 'f' | 'mf' | ''
-  articles: ('le' | 'un' | 'la' | 'une' | '...')[]
+  articles: ('Le' | 'un' | 'La' | 'une' | '___')[]
 }
 
 export const genders: { [name: string]: Gender} = {
   male : {
     label: "m",
-    articles: ['le', 'un']
+    articles: ['Le', 'un']
   },
   female : {
     label: 'f',
-    articles: ['la', 'une']
+    articles: ['La', 'une']
   },
   both : {
     label: 'mf',
-    articles: ['le', 'un', 'la', 'une']
+    articles: ['Le', 'un', 'La', 'une']
   }
 }
 
 export const noneGender: Gender = {
   label: '',
-  articles: ['...', '...']
+  articles: ['___']
 }
