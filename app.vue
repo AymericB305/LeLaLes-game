@@ -27,17 +27,20 @@ const store = useMyStore()
 await store.loadWords()
 
 async function validate() {
-  if (store.isValid) {
-    toast.add({
-      title: store.answer,
-      icon: 'i-heroicons-check-circle',
-      ui: {
-        progress: {
-          base: 'hidden'
-        }
-      },
-    })
+  if (!store.isValid) {    
+    store.fail()
+    return
   }
+  
+  toast.add({
+    title: store.answer,
+    icon: 'i-heroicons-check-circle',
+    ui: {
+      progress: {
+        base: 'hidden'
+      }
+    },
+  })
   await store.progress()
 }
 

@@ -28,20 +28,19 @@ export const useMyStore = defineStore({
       this.selectedGender = gender
       this.selectedIndex = index
     },
-    async progress() {
-      if (this.selectedGender.label == this.currentWord.genre) {        
-        this.index++
-        if (this.index >= max) {
-          this.index = 0
-          await this.loadWords()
-        }
-        this.selectedGender = noneGender
-        this.wrongIndices = []
-      } else {    
-        this.wrongIndices = [...this.wrongIndices, this.selectedIndex]
-        this.selectedGender = noneGender
+    async progress() {     
+      this.index++
+      if (this.index >= max) {
+        this.index = 0
+        await this.loadWords()
       }
-    }
+      this.selectedGender = noneGender
+      this.wrongIndices = []
+    },
+    fail() {
+      this.wrongIndices = [...this.wrongIndices, this.selectedIndex]
+      this.selectedGender = noneGender
+    },
   },
   getters: {
     amount: (state) => state.index + 1,
