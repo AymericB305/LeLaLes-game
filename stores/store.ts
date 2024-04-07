@@ -5,8 +5,9 @@ import type { word } from '@prisma/client'
 const max = 50;
 
 const initialState: State = {
+  loading: [],
   words: [],
-  index: 0,
+  amount: 0,
   score: 0,
   selectedGender: noneGender,
   selectedIndex: 0,
@@ -18,11 +19,13 @@ export const useMyStore = defineStore({
   state: () => initialState,
   actions: {
     async loadWords() {
+      this.loading.push("loadWords")
       const { data, error } = await useFetch<word[]>(`/words/random?amount=${max}`)
       if (!data || !data.value) {
         throw error
       }
       this.words = data.value
+      this.loading.splice(this.loading.indexOf('loadWords'))
     },
     selectGender(gender: Gender, index: number) {
       this.selectedGender = gender
@@ -32,9 +35,8 @@ export const useMyStore = defineStore({
       if (this.wrongIndices.length === 0) {
         this.score++
       }
-      this.index++
-      if (this.index >= max) {
-        this.index = 0
+      this.amount++
+      if (this.amount % max == 0) {
         await this.loadWords()
       }
       this.selectedGender = noneGender
@@ -46,7 +48,10 @@ export const useMyStore = defineStore({
     },
   },
   getters: {
-    currentWord: (state) => state.words[state.index],
+    index: (state) => state.amount % max,
+    currentWord(state): word {
+      return state.words[this.index]
+    },
     answer(state): string {
       const title = `${state.selectedGender.articles[1]} ${this.currentWord.word}`
       if (state.selectedGender.label == 'mf') {

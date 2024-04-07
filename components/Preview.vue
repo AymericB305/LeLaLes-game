@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full flex justify-center items-center">
-    {{ articlesString }} {{ word }} ?
-  </div>
+  <span class="w-full flex justify-center items-center">
+    {{ articlesString }} {{ word }}
+  </span>
 </template>
 
 <script lang="ts" setup>

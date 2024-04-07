@@ -1,10 +1,11 @@
 import type { word } from "@prisma/client"
 
 export type State = {
+  loading: string[],
   words: word[],
-  index: number,
+  amount: number,
   score: number,
   selectedGender: Gender,
   selectedIndex: number,
-  wrongIndices: number[]
+  wrongIndices: number[],
 }
