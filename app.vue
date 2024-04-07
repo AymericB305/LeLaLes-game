@@ -47,11 +47,6 @@ async function validate() {
   toast.add({
     title: store.answer,
     icon: 'i-heroicons-check-circle',
-    ui: {
-      progress: {
-        base: 'hidden'
-      }
-    },
   })
   await store.progress()
 }

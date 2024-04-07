@@ -5,6 +5,11 @@ export default defineAppConfig({
       position: 'top-0 bottom-auto'
     },
     primary: 'bunker',
-    gray: 'cool'
+    gray: 'cool',    
+    notification: {
+      progress: {
+        base: 'hidden'
+      }
+    },
   },
 })
