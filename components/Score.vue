@@ -2,7 +2,7 @@
   <div class="w-full flex justify-center items-center gap-12">
     <UIcon
       name="i-heroicons-question-mark-circle"
-      class="round text-nevada-500"
+      class=" text-nevada-500"
     />
     <UProgress
       class="w-4/6"
