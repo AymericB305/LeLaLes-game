@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full flex justify-center items-center gap-12">
+  <div class="flex justify-around items-center">
     <UIcon
       name="i-heroicons-question-mark-circle"
       class="text-4xl text-nevada-500"
     />
     <UProgress
-      class="w-4/6"
+      class="w-4/6 mx-6"
       :value="score"
       :max="amount"
     />
-    <div class="flex w-2/6">
+    <div class="flex w-1/6">
       {{ `${score} / ${amount}` }}
     </div>
   </div>
