@@ -4,12 +4,16 @@ export default defineAppConfig({
     notifications: {
       position: 'top-0 bottom-auto'
     },
-    primary: 'bunker',
+    primary: 'my-primary',
     gray: 'cool',    
     notification: {
       progress: {
         base: 'hidden'
       }
+    },
+    button: {
+      rounded: 'rounded-full',
+      font: 'font-bold',
     },
   },
 })
