@@ -2,14 +2,14 @@
   <div class="flex justify-around items-center">
     <UIcon
       name="i-heroicons-question-mark-circle"
-      class="w-1/6 text-4xl text-nevada-500"
+      class="w-2/12 text-4xl text-nevada-500"
     />
     <UProgress
-      class="w-4/6 mx-6"
+      class="w-7/12 mx-6"
       :value="score"
       :max="amount"
     />
-    <div class="flex w-1/6">
+    <div class="flex w-3/12">
       {{ `${score} / ${amount}` }}
     </div>
   </div>
