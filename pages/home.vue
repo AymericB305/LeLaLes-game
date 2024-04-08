@@ -44,6 +44,10 @@ const toast = useToast()
 const store = useMyStore()
 
 async function validate() {
+  if (store.selectedIndex === -1) {
+    return
+  }
+
   if (!store.isValid) {    
     store.fail()
     return

@@ -10,7 +10,7 @@ const initialState: State = {
   amount: 0,
   score: 0,
   selectedGender: noneGender,
-  selectedIndex: 0,
+  selectedIndex: -1,
   wrongIndices: [],
 }
 
@@ -41,6 +41,7 @@ export const useMyStore = defineStore({
       }
       this.selectedGender = noneGender
       this.wrongIndices = []
+      this.selectedIndex = -1
     },
     fail() {
       this.wrongIndices = [...this.wrongIndices, this.selectedIndex]
