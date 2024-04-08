@@ -2,7 +2,7 @@
   <div class="flex justify-around items-center">
     <UIcon
       name="i-heroicons-question-mark-circle"
-      class="text-4xl text-nevada-500"
+      class="w-1/6 text-4xl text-nevada-500"
     />
     <UProgress
       class="w-4/6 mx-6"
