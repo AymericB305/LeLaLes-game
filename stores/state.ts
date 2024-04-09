@@ -7,5 +7,5 @@ export type State = {
   score: number,
   selectedGender: Gender,
   selectedIndex: number,
-  wrongIndices: number[],
+  colors: string[],
 }

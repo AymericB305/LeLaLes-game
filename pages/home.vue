@@ -19,7 +19,7 @@
             v-for="(gender, _, i) in genders"
             :class="{ 'col-span-2': i == Object.keys(gender).length }"
             :articles="gender.articles"
-            :color="store.choiceColorByIndex(i)"
+            :color="store.colors[i]"
             @click="store.selectGender(gender, i)"
           />
         </div>
@@ -34,13 +34,10 @@
         size="xl"
       />
     </div>
-
-    <UNotifications />
   </div>
 </template>
 
 <script lang="ts" setup>
-const toast = useToast()
 const store = useMyStore()
 
 async function validate() {
@@ -53,11 +50,6 @@ async function validate() {
     return
   }
   
-  toast.add({
-    title: store.answer,
-    icon: 'i-heroicons-check-circle',
-    timeout: 1800
-  })
   await store.progress()
 }
 

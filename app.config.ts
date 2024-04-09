@@ -5,12 +5,7 @@ export default defineAppConfig({
       position: 'top-0 bottom-auto'
     },
     primary: 'my-primary',
-    gray: 'cool',    
-    notification: {
-      progress: {
-        base: 'hidden'
-      }
-    },
+    gray: 'cool',
     button: {
       rounded: 'rounded-full',
       font: 'font-bold',

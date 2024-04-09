@@ -11,7 +11,7 @@ const initialState: State = {
   score: 0,
   selectedGender: noneGender,
   selectedIndex: -1,
-  wrongIndices: [],
+  colors: ['nevada', 'nevada', 'nevada'],
 }
 
 export const useMyStore = defineStore({
@@ -32,19 +32,23 @@ export const useMyStore = defineStore({
       this.selectedIndex = index
     },
     async progress() {
-      if (this.wrongIndices.length === 0) {
+      this.colors[this.selectedIndex] = 'green'
+      if (this.colors.length === 1) {
         this.score++
       }
-      this.amount++
-      if (this.amount % max == 0) {
-        await this.loadWords()
-      }
-      this.selectedGender = noneGender
-      this.wrongIndices = []
-      this.selectedIndex = -1
+      
+      setTimeout(async () => {
+        this.amount++
+        if (this.amount % max == 0) {
+          await this.loadWords()
+        }
+        this.selectedGender = noneGender
+        this.colors = ['nevada', 'nevada', 'nevada']
+        this.selectedIndex = -1        
+      }, 1000);
     },
     fail() {
-      this.wrongIndices = [...this.wrongIndices, this.selectedIndex]
+      this.colors[this.selectedIndex] = 'red'
       this.selectedGender = noneGender
     },
   },
@@ -63,9 +67,6 @@ export const useMyStore = defineStore({
     isValid(state): boolean {
       return state.selectedGender.label == this.currentWord.genre
     },
-    choiceColorByIndex: (state) => {
-      return (index: number) => state.wrongIndices.findIndex(idx => idx === index) === -1 ? 'nevada' : 'red'
-    }
   }
 })
 
