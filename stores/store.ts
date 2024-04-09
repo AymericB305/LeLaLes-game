@@ -36,12 +36,19 @@ export const useMyStore = defineStore({
       if (this.colors.length === 1) {
         this.score++
       }
-      
-      setTimeout(async () => {
-        this.amount++
-        if (this.amount % max == 0) {
-          await this.loadWords()
+
+      let nextWords = this.words
+      if ((this.amount + 1) % max == 0) {
+        const { data, error } = await useFetch<word[]>(`/words/random?amount=${max}`)
+        if (!data || !data.value) {
+          throw error
         }
+        nextWords = data.value
+      }
+      
+      setTimeout(() => {
+        this.words = nextWords
+        this.amount++
         this.selectedGender = noneGender
         this.colors = ['nevada', 'nevada', 'nevada']
         this.selectedIndex = -1        
