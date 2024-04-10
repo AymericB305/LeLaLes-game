@@ -1,15 +1,18 @@
 <template>
-  <div class="flex justify-around items-center">
-    <UIcon
-      name="i-heroicons-question-mark-circle"
-      class="w-2/12 text-4xl text-nevada-500"
+  <div class="flex justify-between items-center px-8">
+    <UButton
+      icon="i-heroicons-question-mark-circle"
+      class="text-4xl !text-nevada-500"
+      variant="link"
+      size="2xl"
+      to="/help"
     />
     <UProgress
-      class="w-7/12 mx-6"
+      class="mx-6"
       :value="score"
       :max="amount"
     />
-    <div class="flex w-3/12" @click="navigateTo('mistakes')">
+    <div class="flex w-14" @click="navigateTo('mistakes')">
       {{ `${score} / ${amount}` }}
     </div>
   </div>

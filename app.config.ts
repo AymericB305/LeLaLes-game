@@ -9,6 +9,9 @@ export default defineAppConfig({
     button: {
       rounded: 'rounded-full',
       font: 'font-bold',
+      size: {
+        "2xl": 'h-7 w-7'
+      }
     },
   },
 })

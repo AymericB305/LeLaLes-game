@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between py-8 flex-col gap-10 h-full">
+  <div class="flex flex-col justify-between py-8 gap-10 h-full">
     <div class="space-y-20">
       <Score
         :score="store.score"
@@ -25,7 +25,7 @@
       </div>    
     </div>
     
-    <div class="">
+    <div class="flex justify-center">
       <UButton
         @click="validate()"
         class="!text-white px-12"
