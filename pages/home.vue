@@ -10,8 +10,7 @@
         <span class="text-nevada-500 text-2xl">Choisissez le genre correct</span>
         <Preview 
           v-if="store.loading.length == 0"
-          :articles="store.selectedGender.articles"
-          :word="store.currentWord.word"
+          :answer="store.answer"
         />
         <UProgress v-else animation="elastic" />
         <div class="grid grid-cols-2 gap-2">

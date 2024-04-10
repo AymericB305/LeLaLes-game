@@ -1,6 +1,6 @@
 export type Gender = {
   label: 'm' | 'f' | 'mf' | ''
-  articles: ('Le' | 'un' | 'La' | 'une' | '___')[]
+  articles: ('Le' | 'un' | 'la' | 'La' | 'une' | '___')[]
 }
 
 export const genders: { [name: string]: Gender} = {
@@ -14,7 +14,7 @@ export const genders: { [name: string]: Gender} = {
   },
   both : {
     label: 'mf',
-    articles: ['Le', 'un', 'La', 'une']
+    articles: ['Le', 'un', 'la', 'une']
   }
 }
 

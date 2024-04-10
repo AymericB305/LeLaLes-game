@@ -8,4 +8,5 @@ export type State = {
   selectedGender: Gender,
   selectedIndex: number,
   colors: string[],
+  errors: string[],
 }

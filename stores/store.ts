@@ -12,6 +12,7 @@ const initialState: State = {
   selectedGender: noneGender,
   selectedIndex: -1,
   colors: ['nevada', 'nevada', 'nevada'],
+  errors: [],
 }
 
 export const useMyStore = defineStore({
@@ -45,8 +46,10 @@ export const useMyStore = defineStore({
       
       setTimeout(() => {
         // if there was no mistake
-        if (this.colors.findIndex(c => c === 'red') === -1) {
+        if (this.colors.findIndex((c: string) => c === 'red') === -1) {
           this.score++
+        } else {          
+          this.errors.push(this.answer)
         }
         this.words = nextWords
         this.amount++
@@ -66,11 +69,7 @@ export const useMyStore = defineStore({
       return state.words[this.index]
     },
     answer(state): string {
-      const title = `${state.selectedGender.articles[1]} ${this.currentWord.word}`
-      if (state.selectedGender.label == 'mf') {
-        title.concat(` / ${state.selectedGender.articles[3]} ${this.currentWord.word}`)
-      }
-      return title
+      return `${state.selectedGender.articles.join('/')} ${this.currentWord.word}`
     },
     isValid(state): boolean {
       return state.selectedGender.label == this.currentWord.genre

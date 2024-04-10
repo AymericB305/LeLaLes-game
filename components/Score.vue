@@ -9,7 +9,7 @@
       :value="score"
       :max="amount"
     />
-    <div class="flex w-3/12">
+    <div class="flex w-3/12" @click="navigateTo('mistakes')">
       {{ `${score} / ${amount}` }}
     </div>
   </div>
