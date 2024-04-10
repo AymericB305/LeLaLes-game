@@ -12,9 +12,9 @@
       :value="score"
       :max="amount"
     />
-    <div class="flex min-w-14" @click="navigateTo('mistakes')">
+    <ULink class="flex min-w-14 !text-white" to="/mistakes">
       {{ `${score} / ${amount}` }}
-    </div>
+    </ULink>
   </div>
 </template>
 
