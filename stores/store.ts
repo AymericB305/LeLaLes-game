@@ -33,7 +33,7 @@ export const useMyStore = defineStore({
     },
     async progress() {
       this.colors[this.selectedIndex] = 'green'
-      if (this.colors.length === 1) {
+      if (this.colors.findIndex(c => c === 'red') === -1) {
         this.score++
       }
 
