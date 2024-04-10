@@ -33,9 +33,6 @@ export const useMyStore = defineStore({
     },
     async progress() {
       this.colors[this.selectedIndex] = 'green'
-      if (this.colors.findIndex(c => c === 'red') === -1) {
-        this.score++
-      }
 
       let nextWords = this.words
       if ((this.amount + 1) % max == 0) {
@@ -47,6 +44,10 @@ export const useMyStore = defineStore({
       }
       
       setTimeout(() => {
+        // if there was no mistake
+        if (this.colors.findIndex(c => c === 'red') === -1) {
+          this.score++
+        }
         this.words = nextWords
         this.amount++
         this.selectedGender = noneGender
