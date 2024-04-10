@@ -9,4 +9,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['models'],
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'default' }
+  },
 })
