@@ -37,11 +37,7 @@ export const useMyStore = defineStore({
 
       let nextWords = this.words
       if ((this.amount + 1) % max == 0) {
-        const { data, error } = await useFetch<word[]>(`/words/random?amount=${max}`)
-        if (!data || !data.value) {
-          throw error
-        }
-        nextWords = data.value
+        nextWords = await $fetch<word[]>(`/words/random?amount=${max}`)
       }
       
       setTimeout(() => {

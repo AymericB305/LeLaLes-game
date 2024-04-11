@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 const store = useMyStore()
-await store.loadWords()
+await useAsyncData('words', () => store.loadWords().then(() => true))
 
 </script>
 
